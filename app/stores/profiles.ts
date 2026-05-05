@@ -1,51 +1,53 @@
-import type { SignatureProfile, SignatureData } from '~/types/signature'
+import type { SignatureProfile, SignatureData } from "~/types/signature";
+import { defineStore } from "pinia";
+import { ref } from "vue";
 
-const PROFILES_KEY = 'sig-profiles'
+const PROFILES_KEY = "sig-profiles";
 
-export const useProfilesStore = defineStore('profiles', () => {
-  const profiles = ref<SignatureProfile[]>([])
+export const useProfilesStore = defineStore("profiles", () => {
+  const profiles = ref<SignatureProfile[]>([]);
 
   function hydrate() {
     if (import.meta.client) {
-      const raw = localStorage.getItem(PROFILES_KEY)
-      profiles.value = raw ? JSON.parse(raw) : []
+      const raw = localStorage.getItem(PROFILES_KEY);
+      profiles.value = raw ? JSON.parse(raw) : [];
     }
   }
 
   function getProfiles(): SignatureProfile[] {
     if (import.meta.client) {
-      const raw = localStorage.getItem(PROFILES_KEY)
-      return raw ? JSON.parse(raw) : []
+      const raw = localStorage.getItem(PROFILES_KEY);
+      return raw ? JSON.parse(raw) : [];
     }
-    return []
+    return [];
   }
 
   function saveProfile(profile: SignatureProfile) {
-    const all = getProfiles()
-    const idx = all.findIndex((p) => p.id === profile.id)
+    const all = getProfiles();
+    const idx = all.findIndex((p) => p.id === profile.id);
     if (idx >= 0) {
-      all[idx] = profile
+      all[idx] = profile;
     } else {
-      all.push(profile)
+      all.push(profile);
     }
     if (import.meta.client) {
-      localStorage.setItem(PROFILES_KEY, JSON.stringify(all))
+      localStorage.setItem(PROFILES_KEY, JSON.stringify(all));
     }
-    profiles.value = all
+    profiles.value = all;
   }
 
   function deleteProfile(id: string) {
-    const all = getProfiles().filter((p) => p.id !== id)
+    const all = getProfiles().filter((p) => p.id !== id);
     if (import.meta.client) {
-      localStorage.setItem(PROFILES_KEY, JSON.stringify(all))
+      localStorage.setItem(PROFILES_KEY, JSON.stringify(all));
     }
-    profiles.value = all
+    profiles.value = all;
   }
 
   function canSaveMore(currentUser: any): boolean {
-    if (!currentUser) return false
-    if (currentUser.plan === 'premium') return true
-    return getProfiles().length < 3
+    if (!currentUser) return false;
+    if (currentUser.plan === "premium") return true;
+    return getProfiles().length < 3;
   }
 
   return {
@@ -55,5 +57,5 @@ export const useProfilesStore = defineStore('profiles', () => {
     saveProfile,
     deleteProfile,
     canSaveMore,
-  }
-})
+  };
+});
