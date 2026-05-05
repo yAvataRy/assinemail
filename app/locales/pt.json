@@ -1,0 +1,36 @@
+{
+  "form": {
+    "personal": "Pessoal",
+    "work": "Trabalho",
+    "social": "Social",
+    "style": "Estilo",
+    "fullName": "Nome completo",
+    "namePlaceholder": "Seu nome",
+    "email": "E-mail",
+    "phone": "Telefone",
+    "location": "Localização",
+    "photoUrl": "Foto de perfil (URL)",
+    "title": "Cargo / Título",
+    "companyLogo": "Logo da empresa (URL)",
+    "availability": "Status de disponibilidade",
+    "availabilityHours": "Horário de atendimento",
+    "calendly": "Link para agendamento (Calendly)",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "whatsapp": "WhatsApp",
+    "portfolio": "Portfólio",
+    "primaryColor": "Cor primária",
+    "secondaryColor": "Cor secundária"
+  },
+  "templates": {
+    "title": "Templates"
+  },
+  "nav": {
+    "login": "Entrar",
+    "plans": "Planos",
+    "profiles": "Perfis"
+  },
+  "app": {
+    "title": "Dados da Assinatura"
+  }
+}

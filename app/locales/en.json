@@ -1,0 +1,36 @@
+{
+  "form": {
+    "personal": "Personal",
+    "work": "Work",
+    "social": "Social",
+    "style": "Style",
+    "fullName": "Full name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "photoUrl": "Profile photo (URL)",
+    "title": "Job Title",
+    "companyLogo": "Company logo (URL)",
+    "availability": "Availability status",
+    "availabilityHours": "Availability hours",
+    "calendly": "Scheduling link (Calendly)",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "whatsapp": "WhatsApp",
+    "portfolio": "Portfolio",
+    "primaryColor": "Primary color",
+    "secondaryColor": "Secondary color"
+  },
+  "templates": {
+    "title": "Templates"
+  },
+  "nav": {
+    "login": "Login",
+    "plans": "Plans",
+    "profiles": "Profiles"
+  },
+  "app": {
+    "title": "Signature Data"
+  }
+}
