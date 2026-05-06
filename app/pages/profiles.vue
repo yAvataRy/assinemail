@@ -49,7 +49,7 @@ function handleLoad(profile: any) {
       </h1>
 
       <template v-if="profiles.length === 0">
-        <UCard>
+        <div class="bg-card rounded-lg shadow border border-border">
           <template #content>
             <div class="py-12 text-center text-muted-foreground">
               <p>Nenhum perfil salvo ainda.</p>
@@ -58,12 +58,12 @@ function handleLoad(profile: any) {
               >
             </div>
           </template>
-        </UCard>
+        </div>
       </template>
 
       <div v-else class="space-y-3">
         <div v-for="(p, i) in profiles" :key="p.id">
-          <UCard>
+          <div class="bg-card rounded-lg shadow border border-border">
             <template #content>
               <div class="flex items-center justify-between py-4">
                 <div>
@@ -100,7 +100,7 @@ function handleLoad(profile: any) {
                 </div>
               </div>
             </template>
-          </UCard>
+          </div>
         </div>
       </div>
 

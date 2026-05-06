@@ -1,4 +1,4 @@
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event: any) => {
   const id = getRouterParam(event, 'id')
 
   // TODO: Connect to database for analytics tracking

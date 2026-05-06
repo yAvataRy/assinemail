@@ -54,6 +54,15 @@ function socialIcon(
   return `<a href="${url}" style="color:${color};text-decoration:none;margin-right:8px;font-size:13px;" target="_blank">${label}</a>`;
 }
 
+function safeSocialIcon(
+  url: string | undefined,
+  label: string,
+  color: string,
+): string {
+  if (!url) return "";
+  return socialIcon(url, label, color);
+}
+
 function qrCell(
   whatsappUrl: string | undefined,
   qrDataUrl: string | undefined,
@@ -97,10 +106,10 @@ export function renderModern(data: SignatureData, qrDataUrl?: string): string {
               ${location ? `📍 ${location}<br/>` : ""}
             </span>
             <div style="margin-top:8px;">
-              ${socialIcon(linkedinUrl, "LinkedIn", primaryColor)}
-              ${socialIcon(githubUrl, "GitHub", primaryColor)}
-              ${socialIcon(whatsappUrl, "WhatsApp", primaryColor)}
-              ${socialIcon(portfolioUrl, "Portfólio", primaryColor)}
+              ${safeSocialIcon(linkedinUrl, "LinkedIn", "primaryColor")}
+              ${safeSocialIcon(githubUrl, "GitHub", "primaryColor")}
+              ${safeSocialIcon(whatsappUrl, "WhatsApp", "primaryColor")}
+              ${safeSocialIcon(portfolioUrl, "Portfólio", "primaryColor")}
             </div>
             ${calendlyUrl ? `<div style="margin-top:8px;"><a href="${calendlyUrl}" style="background:${primaryColor};color:#fff;padding:4px 12px;border-radius:4px;text-decoration:none;font-size:12px;">📅 Agendar reunião</a></div>` : ""}
             ${availability ? `<div style="margin-top:8px;font-size:11px;color:${secondaryColor};">● ${availability}${availabilityHours ? ` · ${availabilityHours}` : ""}</div>` : ""}
@@ -143,10 +152,10 @@ export function renderClassic(data: SignatureData, qrDataUrl?: string): string {
           ${email ? `${email} · ` : ""}${phone || ""}${location ? ` · ${location}` : ""}
         </span><br/>
         <div style="margin-top:6px;font-size:12px;">
-          ${socialIcon(linkedinUrl, "LinkedIn", primaryColor)}
-          ${socialIcon(githubUrl, "GitHub", primaryColor)}
-          ${socialIcon(whatsappUrl, "WhatsApp", primaryColor)}
-          ${socialIcon(portfolioUrl, "Portfólio", primaryColor)}
+          ${safeSocialIcon(linkedinUrl, "LinkedIn", "primaryColor")}
+          ${safeSocialIcon(githubUrl, "GitHub", "primaryColor")}
+          ${safeSocialIcon(whatsappUrl, "WhatsApp", "primaryColor")}
+          ${safeSocialIcon(portfolioUrl, "Portfólio", "primaryColor")}
           ${calendlyUrl ? `<a href="${calendlyUrl}" style="color:${primaryColor};text-decoration:none;">📅 Agenda</a>` : ""}
         </div>
         ${availability ? `<div style="margin-top:6px;font-size:11px;color:${secondaryColor};">● ${availability}${availabilityHours ? ` · ${availabilityHours}` : ""}</div>` : ""}
@@ -175,9 +184,9 @@ export function renderMinimal(data: SignatureData, qrDataUrl?: string): string {
       <span style="color:${secondaryColor};"> · ${title}</span><br/>
       <span style="font-size:12px;">${email}${phone ? ` · ${phone}` : ""}</span><br/>
       <div style="margin-top:4px;font-size:12px;">
-        ${socialIcon(linkedinUrl, "in", primaryColor)}
-        ${socialIcon(githubUrl, "gh", primaryColor)}
-        ${socialIcon(whatsappUrl, "wa", primaryColor)}
+        ${safeSocialIcon(linkedinUrl, "in", "primaryColor")}
+        ${safeSocialIcon(githubUrl, "gh", "primaryColor")}
+        ${safeSocialIcon(whatsappUrl, "wa", "primaryColor")}
       </div>
     </td></tr>
   </table>`;

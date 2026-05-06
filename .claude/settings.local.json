@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -r @/components/ui app/ --include=*.vue --include=*.ts --include=*.js)",
+      "Bash(ls -la *.json)",
+      "Bash(grep -rh from.*ui/ app/ --include=*.vue --include=*.ts)"
+    ]
+  }
+}

@@ -8,7 +8,7 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <UContainer class="py-10">
+  <div class="container mx-auto py-10 px-4">
     <div class="text-center mb-10">
       <h1
         class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl"
@@ -32,5 +32,5 @@ const { t } = useI18n();
         <ExportActions />
       </section>
     </div>
-  </UContainer>
+  </div>
 </template>

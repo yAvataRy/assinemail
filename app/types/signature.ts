@@ -63,4 +63,5 @@ export const DEFAULT_SIGNATURE: SignatureData = {
   primaryColor: "#1f2937",
   secondaryColor: "#6b7280",
   templateId: "modern",
+  template: "modern",
 };

@@ -15,59 +15,108 @@ const templateOptions = [
 </script>
 
 <template>
-  <UCard class="w-full">
-    <template #header>
-      <h3 class="text-lg font-semibold">{{ t("form.title") }}</h3>
-    </template>
+  <div class="w-full max-w-2xl mx-auto">
+    <div class="bg-card rounded-lg shadow border border-border p-6">
+      <h3 class="text-lg font-semibold mb-4">{{ t("form.title") }}</h3>
 
-    <div class="space-y-4">
-      <!-- Nome e Cargo -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <UFormGroup :label="t('form.name')">
-          <UInput
-            v-model="data.name"
-            icon="i-lucide-user"
-            placeholder="Vinícius Pulcher"
-          />
-        </UFormGroup>
+      <div class="space-y-4">
+        <!-- Nome e Cargo -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-1">{{ t("form.name") }}</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">👤</span>
+              <input
+                v-model="data.name"
+                type="text"
+                placeholder="Vinícius Pulcher"
+                class="w-full pl-10 pr-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+              />
+            </div>
+          </div>
 
-        <UFormGroup :label="t('form.role')">
-          <UInput
-            v-model="data.role"
-            icon="i-lucide-briefcase"
-            placeholder="Frontend Developer"
-          />
-        </UFormGroup>
+          <div>
+            <label class="block text-sm font-medium mb-1">{{ t("form.role") }}</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">💼</span>
+              <input
+                v-model="data.role"
+                type="text"
+                placeholder="Frontend Developer"
+                class="w-full pl-10 pr-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Contato -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-1">{{ t("form.email") }}</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">✉️</span>
+              <input
+                v-model="data.email"
+                type="email"
+                class="w-full pl-10 pr-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">{{ t("form.phone") }}</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">📞</span>
+              <input
+                v-model="data.phone"
+                type="text"
+                class="w-full pl-10 pr-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Website e Empresa -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-1">{{ t("form.company") }}</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">🏢</span>
+              <input
+                v-model="data.company"
+                type="text"
+                class="w-full pl-10 pr-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">{{ t("form.website") }}</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">🌐</span>
+              <input
+                v-model="data.website"
+                type="text"
+                class="w-full pl-10 pr-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+              />
+            </div>
+          </div>
+        </div>
+
+        <hr class="border-border my-6" />
+
+        <!-- Seleção de Template -->
+        <div>
+          <label class="block text-sm font-medium mb-1">{{ t("form.template") }}</label>
+          <select
+            v-model="data.template"
+            class="w-full px-3 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+          >
+            <option value="modern">Modern</option>
+            <option value="classic">Classic</option>
+          </select>
+        </div>
       </div>
-
-      <!-- Contato -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <UFormGroup :label="t('form.email')">
-          <UInput v-model="data.email" type="email" icon="i-lucide-mail" />
-        </UFormGroup>
-
-        <UFormGroup :label="t('form.phone')">
-          <UInput v-model="data.phone" icon="i-lucide-phone" />
-        </UFormGroup>
-      </div>
-
-      <!-- Website e Empresa -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <UFormGroup :label="t('form.company')">
-          <UInput v-model="data.company" icon="i-lucide-building" />
-        </UFormGroup>
-
-        <UFormGroup :label="t('form.website')">
-          <UInput v-model="data.website" icon="i-lucide-globe" />
-        </UFormGroup>
-      </div>
-
-      <UDivider class="my-6" />
-
-      <!-- Seleção de Template -->
-      <UFormGroup :label="t('form.template')">
-        <USelect v-model="data.template" :options="templateOptions" />
-      </UFormGroup>
     </div>
-  </UCard>
+  </div>
 </template>

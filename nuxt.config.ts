@@ -15,8 +15,6 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
-    'shadcn-nuxt',
-    '@nuxt/ui',
   ],
   css: ['~/assets/css/main.css'],
   i18n: {
