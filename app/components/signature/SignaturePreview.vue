@@ -1,18 +1,15 @@
 <script setup lang="ts">
-import { renderModern, renderClassic } from "~/utils/signatureTemplates";
+import { renderSignature } from "~/utils/signatureTemplates";
 import { useSignatureStore } from "~/stores/signature";
 import { storeToRefs } from "pinia";
-import { computed, ref } from "vue";
+import { ref, computed } from "vue";
 
 const signatureStore = useSignatureStore();
 const { data, qrDataUrl } = storeToRefs(signatureStore);
 
 // Computado para renderizar o template correto
 const signatureHtml = computed(() => {
-  if ((data.value.template || data.value.templateId) === "modern") {
-    return renderModern(data.value, qrDataUrl.value);
-  }
-  return renderClassic(data.value, qrDataUrl.value);
+  return renderSignature(data.value, qrDataUrl.value);
 });
 
 const containerRef = ref<HTMLElement | null>(null);

@@ -47,3 +47,158 @@ Notas finais
 ---
 
 Gerado em: 2026-05-05
+
+A partir daqui e com a data e horario
+
+---
+
+## Erros Atuais (2026-05-06 14:23)
+
+### Erro 1: Caminho incorreto dos arquivos de tradução i18n
+
+**Erro Identificado:**
+```
+ERROR  Pre-transform error: Failed to resolve import "../app/app/locales/pt.json" from "virtual:nuxt:D%3A%2FUsers%2FVineL%2FDesktop%2FFront.Vinicius%2FAplicativos%20-%20Vinicius%2Fsignature-studio-nuxt%2F.nuxt%2Fi18n.options.mjs". Does the file exist?
+```
+
+**Causa Raiz:**
+A configuração do `nuxt.config.ts` estava com `langDir: 'app/locales/'` mas o Nuxt estava tentando importar de `../app/app/locales/` (caminho duplicado). O caminho correto deve ser relativo ao diretório `app/`.
+
+**Solução Aplicada:**
+Alterar `langDir` de `'app/locales/'` para `'locales/'` no `nuxt.config.ts`:
+```typescript
+i18n: {
+  langDir: 'locales/',  // Correto - relativo ao srcDir
+}
+```
+
+### Erro 2: Componente ExportActions não resolvido
+
+**Erro Identificado:**
+```
+WARN  [Vue warn]: Failed to resolve component: ExportActions
+```
+
+**Causa Raiz:**
+O componente está em `app/components/signature/ExportActions.vue` mas estava sendo referenciado como `<ExportActions>` no template. No Nuxt, componentes em subdiretórios são auto-importados com nomes baseados no caminho completo.
+
+**Solução Aplicada:**
+Usar o nome correto do componente no template:
+```vue
+<!-- Errado -->
+<ExportActions />
+
+<!-- Correto - Nuxt auto-importa como SignatureExportActions -->
+<SignatureExportActions />
+```
+
+### Erro 3: Chaves de tradução faltando
+
+**Erro Identificado:**
+```
+WARN  [intlify] Not found 'home.subtitle' key in 'pt' locale messages.
+WARN  [intlify] Not found 'app.title' key in 'pt' locale messages.
+WARN  [intlify] Not found 'form.fullName' key in 'pt' locale messages.
+```
+
+**Causa Raiz:**
+Os arquivos de tradução (`pt.json`, `en.json`, `es.json`) não continham todas as chaves usadas no código.
+
+**Solução Aplicada:**
+Adicionar as chaves faltantes aos arquivos de tradução:
+```json
+{
+  "home": {
+    "subtitle": "Crie assinaturas de e-mail profissionais em minutos"
+  },
+  "form": {
+    "fullName": "Nome completo",
+    "namePlaceholder": "Seu nome",
+    "name": "Nome",
+    "role": "Cargo",
+    "title": "Cargo / Título",
+    "company": "Empresa",
+    "website": "Website",
+    "template": "Template"
+  },
+  "app": {
+    "title": "Dados da Assinatura"
+  }
+}
+```
+
+### Erro 4: Componente anônimo sem template
+
+**Erro Identificado:**
+```
+WARN  [Vue warn]: Component <Anonymous> is missing template or render function.
+```
+
+**Causa Raiz:**
+Provavelmente causado pelo Erro 2 (ExportActions não resolvido) - quando um componente não é encontrado, o Vue cria um componente anônimo vazio.
+
+**Solução:**
+Resolver o Erro 2 (ExportActions) deve corrigir este problema automaticamente.
+
+### Erro 5: Campo templateId não sendo usado
+
+**Erro Identificado:**
+O formulário estava usando `data.template` em vez de `data.templateId`.
+
+**Solução Aplicada:**
+Alterar o v-model no formulário:
+```vue
+<!-- Errado -->
+<select v-model="data.template">
+
+<!-- Correto -->
+<select v-model="data.templateId">
+```
+
+---
+
+## Possíveis Soluções para Erros Recorrentes
+
+### Solução 1: Verificar estrutura de diretórios
+
+Sempre que configurar caminhos no Nuxt, verificar:
+- `srcDir` define o diretório raiz do código fonte
+- Caminhos em `langDir`, `pages`, `components` são relativos ao `srcDir`
+- Se `srcDir: 'app/'`, então `langDir: 'locales/'` aponta para `app/locales/`
+
+### Solução 2: Nomenclatura de componentes no Nuxt
+
+O Nuxt auto-importa componentes com base no caminho:
+- `app/components/ExportActions.vue` → `<ExportActions />`
+- `app/components/signature/ExportActions.vue` → `<SignatureExportActions />`
+- `app/components/ui/Button.vue` → `<UiButton />`
+
+### Solução 3: Verificar arquivos de tradução
+
+Antes de usar uma chave de tradução:
+1. Verificar se a chave existe em todos os arquivos de locale
+2. Usar estrutura aninhada consistente (ex: `form.name`, `form.email`)
+3. Testar com `t('chave.inexistente')` para ver warnings no console
+
+### Solução 4: Debug de componentes não resolvidos
+
+Se um componente não é encontrado:
+1. Verificar se o arquivo existe no caminho esperado
+2. Verificar se há erros de sintaxe no componente
+3. Tentar import explícito: `import ExportActions from '~/components/signature/ExportActions.vue'`
+4. Verificar o nome gerado pelo Nuxt (pode ser diferente do esperado)
+
+### Solução 5: Limpar cache do Nuxt
+
+Se erros persistem após correções:
+```bash
+# Remover diretórios de cache
+rm -rf .nuxt node_modules/.vite
+
+# Reiniciar dev server
+npm run dev
+```
+
+---
+
+Gerado em: 2026-05-06 14:23
