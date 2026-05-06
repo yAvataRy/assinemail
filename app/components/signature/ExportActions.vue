@@ -5,12 +5,14 @@ import { useAuthStore } from "~/stores/auth";
 import { renderSignature } from "~/utils/signatureTemplates";
 import { toPng } from "html-to-image";
 import { ref } from "vue";
-import { useToast } from "#imports";
+import { useToast } from "~/composables/useToast";
+import { Copy, Download, Image, Share2 } from "lucide-vue-next";
 
 const store = useSignatureStore();
 const authStore = useAuthStore();
 const { data, qrDataUrl } = storeToRefs(store);
 const previewRef = ref<HTMLDivElement | null>(null);
+const toast = useToast();
 
 const emit = defineEmits<{
   (e: "upgrade-click"): void;
@@ -19,9 +21,7 @@ const emit = defineEmits<{
 function copyHtml() {
   const html = renderSignature(data.value, qrDataUrl.value);
   navigator.clipboard.writeText(html);
-  useToast().success("HTML copiado!", {
-    description: "Cole no seu cliente de e-mail.",
-  });
+  toast.success("HTML copiado!");
 }
 
 function downloadHtml() {
@@ -55,9 +55,9 @@ async function exportPng() {
       .replace(/\s+/g, "-")
       .toLowerCase()}.png`;
     a.click();
-    useToast().success("PNG exportado!");
+    toast.success("PNG exportado!");
   } catch {
-    useToast().error("Erro ao exportar PNG");
+    toast.error("Erro ao exportar PNG");
   }
 }
 
@@ -65,9 +65,7 @@ function shareLink() {
   const encoded = btoa(encodeURIComponent(JSON.stringify(data.value)));
   const url = `${window.location.origin}?sig=${encoded}`;
   navigator.clipboard.writeText(url);
-  useToast().success("Link copiado!", {
-    description: "Compartilhe este link com outros.",
-  });
+  toast.success("Link copiado!");
 }
 
 defineExpose({ previewRef });
@@ -75,21 +73,37 @@ defineExpose({ previewRef });
 
 <template>
   <div class="flex flex-wrap gap-2">
-    <UButton @click="copyHtml" size="sm" class="gap-1.5">
+    <button
+      type="button"
+      @click="copyHtml"
+      class="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+    >
       <Copy class="h-3.5 w-3.5" />
       Copiar HTML
-    </UButton>
-    <UButton @click="downloadHtml" variant="outline" size="sm" class="gap-1.5">
+    </button>
+    <button
+      type="button"
+      @click="downloadHtml"
+      class="flex items-center gap-1.5 px-3 py-1.5 text-sm border border-input rounded-md bg-background hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+    >
       <Download class="h-3.5 w-3.5" />
       Baixar .html
-    </UButton>
-    <UButton @click="exportPng" variant="outline" size="sm" class="gap-1.5">
+    </button>
+    <button
+      type="button"
+      @click="exportPng"
+      class="flex items-center gap-1.5 px-3 py-1.5 text-sm border border-input rounded-md bg-background hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+    >
       <Image class="h-3.5 w-3.5" />
       PNG {{ !authStore.isPremium() ? "🔒" : "" }}
-    </UButton>
-    <UButton @click="shareLink" variant="ghost" size="sm" class="gap-1.5">
+    </button>
+    <button
+      type="button"
+      @click="shareLink"
+      class="flex items-center gap-1.5 px-3 py-1.5 text-sm hover:bg-muted rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+    >
       <Share2 class="h-3.5 w-3.5" />
       Compartilhar
-    </UButton>
+    </button>
   </div>
 </template>

@@ -1,4 +1,7 @@
 {
+  "home": {
+    "subtitle": "Crie assinaturas de e-mail profissionais em minutos"
+  },
   "form": {
     "personal": "Pessoal",
     "work": "Trabalho",
@@ -6,11 +9,14 @@
     "style": "Estilo",
     "fullName": "Nome completo",
     "namePlaceholder": "Seu nome",
+    "name": "Nome",
     "email": "E-mail",
     "phone": "Telefone",
     "location": "Localização",
     "photoUrl": "Foto de perfil (URL)",
     "title": "Cargo / Título",
+    "role": "Cargo",
+    "company": "Empresa",
     "companyLogo": "Logo da empresa (URL)",
     "availability": "Status de disponibilidade",
     "availabilityHours": "Horário de atendimento",
@@ -19,8 +25,10 @@
     "github": "GitHub",
     "whatsapp": "WhatsApp",
     "portfolio": "Portfólio",
+    "website": "Website",
     "primaryColor": "Cor primária",
-    "secondaryColor": "Cor secundária"
+    "secondaryColor": "Cor secundária",
+    "template": "Template"
   },
   "templates": {
     "title": "Templates"

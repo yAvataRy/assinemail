@@ -48,19 +48,19 @@ export const TEMPLATES: TemplateInfo[] = [
 function socialIcon(
   url: string | undefined,
   label: string,
-  color: string,
+  color: string | undefined,
 ): string {
   if (!url) return "";
-  return `<a href="${url}" style="color:${color};text-decoration:none;margin-right:8px;font-size:13px;" target="_blank">${label}</a>`;
+  return `<a href="${url}" style="color:${color || "#1f2937"};text-decoration:none;margin-right:8px;font-size:13px;" target="_blank">${label}</a>`;
 }
 
 function safeSocialIcon(
   url: string | undefined,
   label: string,
-  color: string,
+  color: string | undefined,
 ): string {
   if (!url) return "";
-  return socialIcon(url, label, color);
+  return socialIcon(url, label, color || "#1f2937");
 }
 
 function qrCell(
@@ -89,8 +89,8 @@ export function renderModern(data: SignatureData, qrDataUrl?: string): string {
     availability,
     availabilityHours,
     companyLogoUrl,
-    primaryColor,
-    secondaryColor,
+    primaryColor = "#1f2937",
+    secondaryColor = "#6b7280",
   } = data;
   return `<table cellpadding="0" cellspacing="0" style="font-family:'Segoe UI',Helvetica,Arial,sans-serif;font-size:14px;color:#333;max-width:600px;">
     <tr>
@@ -106,10 +106,10 @@ export function renderModern(data: SignatureData, qrDataUrl?: string): string {
               ${location ? `📍 ${location}<br/>` : ""}
             </span>
             <div style="margin-top:8px;">
-              ${safeSocialIcon(linkedinUrl, "LinkedIn", "primaryColor")}
-              ${safeSocialIcon(githubUrl, "GitHub", "primaryColor")}
-              ${safeSocialIcon(whatsappUrl, "WhatsApp", "primaryColor")}
-              ${safeSocialIcon(portfolioUrl, "Portfólio", "primaryColor")}
+              ${safeSocialIcon(linkedinUrl, "LinkedIn", primaryColor)}
+              ${safeSocialIcon(githubUrl, "GitHub", primaryColor)}
+              ${safeSocialIcon(whatsappUrl, "WhatsApp", primaryColor)}
+              ${safeSocialIcon(portfolioUrl, "Portfólio", primaryColor)}
             </div>
             ${calendlyUrl ? `<div style="margin-top:8px;"><a href="${calendlyUrl}" style="background:${primaryColor};color:#fff;padding:4px 12px;border-radius:4px;text-decoration:none;font-size:12px;">📅 Agendar reunião</a></div>` : ""}
             ${availability ? `<div style="margin-top:8px;font-size:11px;color:${secondaryColor};">● ${availability}${availabilityHours ? ` · ${availabilityHours}` : ""}</div>` : ""}
@@ -138,8 +138,8 @@ export function renderClassic(data: SignatureData, qrDataUrl?: string): string {
     availability,
     availabilityHours,
     companyLogoUrl,
-    primaryColor,
-    secondaryColor,
+    primaryColor = "#1f2937",
+    secondaryColor = "#6b7280",
   } = data;
   return `<table cellpadding="0" cellspacing="0" style="font-family:Georgia,'Times New Roman',serif;font-size:14px;color:#333;max-width:600px;border-top:3px solid ${primaryColor};padding-top:12px;">
     <tr>
@@ -152,10 +152,10 @@ export function renderClassic(data: SignatureData, qrDataUrl?: string): string {
           ${email ? `${email} · ` : ""}${phone || ""}${location ? ` · ${location}` : ""}
         </span><br/>
         <div style="margin-top:6px;font-size:12px;">
-          ${safeSocialIcon(linkedinUrl, "LinkedIn", "primaryColor")}
-          ${safeSocialIcon(githubUrl, "GitHub", "primaryColor")}
-          ${safeSocialIcon(whatsappUrl, "WhatsApp", "primaryColor")}
-          ${safeSocialIcon(portfolioUrl, "Portfólio", "primaryColor")}
+          ${safeSocialIcon(linkedinUrl, "LinkedIn", primaryColor)}
+          ${safeSocialIcon(githubUrl, "GitHub", primaryColor)}
+          ${safeSocialIcon(whatsappUrl, "WhatsApp", primaryColor)}
+          ${safeSocialIcon(portfolioUrl, "Portfólio", primaryColor)}
           ${calendlyUrl ? `<a href="${calendlyUrl}" style="color:${primaryColor};text-decoration:none;">📅 Agenda</a>` : ""}
         </div>
         ${availability ? `<div style="margin-top:6px;font-size:11px;color:${secondaryColor};">● ${availability}${availabilityHours ? ` · ${availabilityHours}` : ""}</div>` : ""}
@@ -172,8 +172,8 @@ export function renderMinimal(data: SignatureData, qrDataUrl?: string): string {
     title,
     email,
     phone,
-    primaryColor,
-    secondaryColor,
+    primaryColor = "#1f2937",
+    secondaryColor = "#6b7280",
     linkedinUrl,
     githubUrl,
     whatsappUrl,
@@ -184,9 +184,9 @@ export function renderMinimal(data: SignatureData, qrDataUrl?: string): string {
       <span style="color:${secondaryColor};"> · ${title}</span><br/>
       <span style="font-size:12px;">${email}${phone ? ` · ${phone}` : ""}</span><br/>
       <div style="margin-top:4px;font-size:12px;">
-        ${safeSocialIcon(linkedinUrl, "in", "primaryColor")}
-        ${safeSocialIcon(githubUrl, "gh", "primaryColor")}
-        ${safeSocialIcon(whatsappUrl, "wa", "primaryColor")}
+        ${safeSocialIcon(linkedinUrl, "in", primaryColor)}
+        ${safeSocialIcon(githubUrl, "gh", primaryColor)}
+        ${safeSocialIcon(whatsappUrl, "wa", primaryColor)}
       </div>
     </td></tr>
   </table>`;

@@ -1,4 +1,4 @@
-import { defineNuxtPlugin } from '#app'
+import { defineNuxtPlugin } from '#imports'
 import * as LucideIcons from 'lucide-vue-next'
 
 export default defineNuxtPlugin((nuxtApp: any) => {

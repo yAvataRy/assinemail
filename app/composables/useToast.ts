@@ -1,3 +1,5 @@
+import { ref } from 'vue'
+
 // Sistema simples de notificações
 export const useToast = () => {
   const toasts = ref<Array<{ id: string; message: string; type: 'success' | 'error' | 'info' }>>([])
@@ -6,7 +8,7 @@ export const useToast = () => {
     const id = Date.now().toString()
     toasts.value.push({ id, message, type })
     setTimeout(() => {
-      toasts.value = toasts.value.filter(t => t.id !== id)
+      toasts.value = toasts.value.filter((t: { id: string }) => t.id !== id)
     }, 3000)
   }
 

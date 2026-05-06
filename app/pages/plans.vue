@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { Check, Crown, ArrowLeft } from "lucide-vue-next";
 import { useAuthStore } from "~/stores/auth";
-import { useToast, navigateTo } from "#imports";
+import { useToast } from "~/composables/useToast";
+import { navigateTo } from "#imports";
 import { computed } from "vue";
 
 definePageMeta({ middleware: [] });
@@ -47,9 +48,7 @@ function handleUpgrade() {
     return;
   }
   authStore.upgradePlan();
-  toast.success("🎉 Premium ativado!", {
-    description: "Todos os recursos estão disponíveis.",
-  });
+  toast.success("🎉 Premium ativado!");
 }
 </script>
 

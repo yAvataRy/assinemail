@@ -9,7 +9,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "types": ["node", "vue", "pinia", "nuxt"],
-    "ignoreDeprecations": ["6.0"],
     "paths": {
       "~/*": ["./app/*"],
       "@/*": ["./app/*"],

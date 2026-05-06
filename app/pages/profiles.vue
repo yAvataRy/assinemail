@@ -2,7 +2,8 @@
 import { Trash2, Edit, FolderOpen, ArrowLeft } from "lucide-vue-next";
 import { useAuthStore } from "~/stores/auth";
 import { useProfilesStore } from "~/stores/profiles";
-import { useToast, navigateTo } from "#imports";
+import { useToast } from "~/composables/useToast";
+import { navigateTo } from "#imports";
 import { computed, onMounted } from "vue";
 
 definePageMeta({ middleware: [] });
@@ -35,14 +36,13 @@ function handleLoad(profile: any) {
 <template>
   <div class="min-h-screen bg-background p-4">
     <div class="container max-w-2xl py-10">
-      <UButton
-        variant="ghost"
-        size="sm"
+      <button
+        type="button"
         @click="navigateTo('/')"
-        class="mb-6 gap-1"
+        class="flex items-center gap-1 px-3 py-1.5 text-sm hover:bg-muted rounded-md focus:outline-none focus:ring-2 focus:ring-ring mb-6"
       >
         <ArrowLeft class="h-3.5 w-3.5" />Voltar
-      </UButton>
+      </button>
 
       <h1 class="text-2xl font-bold mb-6 flex items-center gap-2">
         <FolderOpen class="h-5 w-5 text-primary" />Perfis Salvos
@@ -50,56 +50,48 @@ function handleLoad(profile: any) {
 
       <template v-if="profiles.length === 0">
         <div class="bg-card rounded-lg shadow border border-border">
-          <template #content>
-            <div class="py-12 text-center text-muted-foreground">
-              <p>Nenhum perfil salvo ainda.</p>
-              <UButton variant="outline" class="mt-4" @click="navigateTo('/')"
-                >Criar assinatura</UButton
-              >
-            </div>
-          </template>
+          <div class="py-12 text-center text-muted-foreground">
+            <p>Nenhum perfil salvo ainda.</p>
+            <button
+              type="button"
+              @click="navigateTo('/')"
+              class="mt-4 px-4 py-2 border border-input rounded-md bg-background hover:bg-muted"
+            >
+              Criar assinatura
+            </button>
+          </div>
         </div>
       </template>
 
       <div v-else class="space-y-3">
-        <div v-for="(p, i) in profiles" :key="p.id">
-          <div class="bg-card rounded-lg shadow border border-border">
-            <template #content>
-              <div class="flex items-center justify-between py-4">
-                <div>
-                  <h3 class="font-medium text-sm">{{ p.name }}</h3>
-                  <p class="text-xs text-muted-foreground">
-                    {{ p.data.title }} · {{ p.data.email }}
-                  </p>
-                  <p class="text-xs text-muted-foreground">
-                    Atualizado:
-                    {{
-                      p.updatedAt
-                        ? new Date(p.updatedAt).toLocaleDateString("pt-BR")
-                        : "-"
-                    }}
-                  </p>
-                </div>
-                <div class="flex gap-2">
-                  <UButton
-                    variant="outline"
-                    size="sm"
-                    @click="handleLoad(p)"
-                    class="gap-1"
-                  >
-                    <Edit class="h-3.5 w-3.5" />Editar
-                  </UButton>
-                  <UButton
-                    variant="ghost"
-                    size="sm"
-                    @click="handleDelete(p.id)"
-                    class="text-destructive"
-                  >
-                    <Trash2 class="h-3.5 w-3.5" />
-                  </UButton>
-                </div>
-              </div>
-            </template>
+        <div v-for="p in profiles" :key="p.id" class="bg-card rounded-lg shadow border border-border">
+          <div class="flex items-center justify-between py-4 px-4">
+            <div>
+              <h3 class="font-medium text-sm">{{ p.name }}</h3>
+              <p class="text-xs text-muted-foreground">
+                {{ p.data.title }} · {{ p.data.email }}
+              </p>
+              <p class="text-xs text-muted-foreground">
+                Atualizado:
+                {{ p.updatedAt ? new Date(p.updatedAt).toLocaleDateString("pt-BR") : "-" }}
+              </p>
+            </div>
+            <div class="flex gap-2">
+              <button
+                type="button"
+                @click="handleLoad(p)"
+                class="flex items-center gap-1 px-3 py-1.5 text-sm border border-input rounded-md bg-background hover:bg-muted"
+              >
+                <Edit class="h-3.5 w-3.5" />Editar
+              </button>
+              <button
+                type="button"
+                @click="handleDelete(p.id)"
+                class="flex items-center gap-1 px-3 py-1.5 text-sm hover:bg-muted rounded-md"
+              >
+                <Trash2 class="h-3.5 w-3.5" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
