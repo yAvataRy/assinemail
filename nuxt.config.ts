@@ -28,9 +28,6 @@ export default defineNuxtConfig({
     lazy: true,
     langDir: 'locales/',
   },
-  tailwindcss: {
-    configPath: 'tailwind.config.ts',
-  },
   runtimeConfig: {
     public: {
       appName: 'AssineMail',

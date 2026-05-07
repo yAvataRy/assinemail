@@ -29,7 +29,7 @@ const { t } = useI18n();
       <!-- Lado Direito: Preview e Export -->
       <section class="space-y-6">
         <SignaturePreview />
-        <ExportActions />
+        <SignatureExportActions />
       </section>
     </div>
   </div>

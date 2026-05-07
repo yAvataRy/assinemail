@@ -5,7 +5,11 @@
       "Bash(ls -la *.json)",
       "Bash(grep -rh from.*ui/ app/ --include=*.vue --include=*.ts)",
       "Bash(npm run *)",
-      "Bash(npx nuxi *)"
+      "Bash(npx nuxi *)",
+      "Bash(npm list *)",
+      "Bash(npm view *)",
+      "Bash(npm install *)",
+      "Bash(npm outdated *)"
     ]
   }
 }

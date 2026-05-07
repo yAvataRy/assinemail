@@ -1,0 +1,44 @@
+{
+  "home": {
+    "subtitle": "Create professional email signatures in minutes"
+  },
+  "form": {
+    "personal": "Personal",
+    "work": "Work",
+    "social": "Social",
+    "style": "Style",
+    "fullName": "Full name",
+    "namePlaceholder": "Your name",
+    "name": "Name",
+    "email": "E-mail",
+    "phone": "Phone",
+    "location": "Location",
+    "photoUrl": "Profile photo (URL)",
+    "title": "Job title",
+    "role": "Role",
+    "company": "Company",
+    "companyLogo": "Company logo (URL)",
+    "availability": "Availability status",
+    "availabilityHours": "Business hours",
+    "calendly": "Scheduling link (Calendly)",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "whatsapp": "WhatsApp",
+    "portfolio": "Portfolio",
+    "website": "Website",
+    "primaryColor": "Primary color",
+    "secondaryColor": "Secondary color",
+    "template": "Template"
+  },
+  "templates": {
+    "title": "Templates"
+  },
+  "nav": {
+    "login": "Login",
+    "plans": "Plans",
+    "profiles": "Profiles"
+  },
+  "app": {
+    "title": "Signature Data"
+  }
+}
